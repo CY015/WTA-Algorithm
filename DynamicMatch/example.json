@@ -1,0 +1,17 @@
+# 单次态势输入数据格式（字典/JSON）
+single_situation = {
+    "timestamp": 1620001200.0,  #  Unix时间戳（秒），如1620001200=2021-05-03 10:00:00
+    "target_changes": {         # 目标变化（仅含新增/删除/修正）
+        "add": [                # 新增目标
+            Target(id=3, value=150.0, components=[(0.4,1.0),(0.6,1.0)])
+        ],
+        "remove": [2],          # 移除目标ID列表（如撤离的目标2）
+        "update": [             # 修正目标状态（如毁伤度从0.3修正为0.2）
+            {"target_id": 1, "new_damage": 0.2}
+        ]
+    },
+    "ammo_changes": {           # 弹药变化（可选，如补充库存）
+        "add": [{"ammo_id": 1, "add_stock": 10}]  # 弹药1补充10发
+    },
+    "decision_need": True       # 是否需要立即重新决策（True=紧急，False=仅更新状态）
+}
